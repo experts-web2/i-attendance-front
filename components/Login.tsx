@@ -12,7 +12,7 @@ import {
   Title,
   Thumbnail,
 } from "native-base";
-import { LoginStyle } from "../styles";
+import { MainStyle } from "../styles";
 import { IUserLogin } from "../models";
 
 const Login = () => {
@@ -22,26 +22,26 @@ const Login = () => {
     console.log("user", user);
   };
   return (
-    <Container style={LoginStyle.container}>
-      <Content contentContainerStyle={LoginStyle.contentContainerStyle}>
-        <Title style={LoginStyle.headerTitle}>Login</Title>
+    <Container style={MainStyle.container}>
+      <Content contentContainerStyle={MainStyle.contentContainerStyle}>
+        <Title style={MainStyle.headerTitle}>Login</Title>
 
         <Thumbnail
-          style={LoginStyle.logo}
+          style={MainStyle.logo}
           size={100}
           source={{
             uri: "https://logodix.com/logo/1829059.png",
           }}
         />
         <Form>
-          <Item style={LoginStyle.formItem} stackedLabel last>
+          <Item style={MainStyle.formItem} stackedLabel last>
             <Label>Email</Label>
             <Input
               defaultValue={user.email}
               onChangeText={(value) => setUser({ ...user, email: value })}
             />
           </Item>
-          <Item style={LoginStyle.formItem} stackedLabel last>
+          <Item style={MainStyle.formItem} stackedLabel last>
             <Label>Password</Label>
             <Input
               defaultValue={user.password}
@@ -49,10 +49,10 @@ const Login = () => {
               onChangeText={(value) => setUser({ ...user, password: value })}
             />
           </Item>
-          <Button style={LoginStyle.formBtn} primary>
-            <Text style={LoginStyle.fromBtnText} onPress={() => handleLogin()}>
-              {" "}
-              Login{" "}
+          <Button style={MainStyle.formBtn} primary>
+            <Text style={MainStyle.fromBtnText} onPress={() => handleLogin()}>
+
+              Login
             </Text>
           </Button>
 
