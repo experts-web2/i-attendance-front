@@ -1,6 +1,6 @@
 import { StyleSheet } from "react-native";
 
-export const LoginStyle = StyleSheet.create({
+export const MainStyle = StyleSheet.create({
   container: {
     flex: 1,
     flexDirection: "column",
