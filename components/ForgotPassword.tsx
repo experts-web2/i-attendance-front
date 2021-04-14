@@ -16,9 +16,12 @@ import { MainStyle } from "../styles";
 const ForgotPassword = () => {
 
   const [email, setEmail] = useState("");
-
+  const [error, setError] = useState(false);
  const handleRequestPassword =()=>{
- console.log("email" , email)
+   if(!email){
+    setError(true)
+   }
+
 
   }
   return (
@@ -33,13 +36,13 @@ const ForgotPassword = () => {
           }}
         />
         <Form>
-          <Item style={MainStyle.formItem} stackedLabel last>
+          <Item  error={error && !email} style={MainStyle.formItem} stackedLabel last>
             <Label>Email</Label>
             <Input defaultValue={email} onChangeText={(value)=> setEmail(value)}/>
           </Item>
-
-          <Button style={MainStyle.formBtn}primary>
-            <Text style={MainStyle.fromBtnText} onPress={() => handleRequestPassword()}>Request Password</Text>
+{error && !email && <Text style={MainStyle.errorMessage}>Email is required</Text>}
+          <Button style={MainStyle.formBtn}  onPress={() => handleRequestPassword()} primary>
+            <Text style={MainStyle.fromBtnText}>Request Password</Text>
           </Button>
         </Form>
       </Content>

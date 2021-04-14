@@ -14,12 +14,18 @@ import {
 } from "native-base";
 import { MainStyle } from "../styles";
 import { IUserLogin } from "../models";
-
+import {login} from "../services/user.service"
 const Login = () => {
   const [user, setUser] = useState<IUserLogin>({ email: "", password: "" });
+  const [error , setError] =useState(false)
 
   const handleLogin = () => {
-    console.log("user", user);
+
+    if(!user.email || !user.password ){
+      setError(true)
+    }
+    login(user).then((response) => console.log(response)).catch((err)=> console.log(err))
+    
   };
   return (
     <Container style={MainStyle.container}>
@@ -34,14 +40,17 @@ const Login = () => {
           }}
         />
         <Form>
-          <Item style={MainStyle.formItem} stackedLabel last>
+          <Item error={error && !user.email} style={MainStyle.formItem}  stackedLabel last>
             <Label>Email</Label>
             <Input
               defaultValue={user.email}
               onChangeText={(value) => setUser({ ...user, email: value })}
             />
           </Item>
-          <Item style={MainStyle.formItem} stackedLabel last>
+          {error && !user.email && <Text style={MainStyle.errorMessage}>Email is required</Text>}
+
+
+          <Item error={error && !user.password} style={MainStyle.formItem}  stackedLabel last>
             <Label>Password</Label>
             <Input
               defaultValue={user.password}
@@ -49,8 +58,9 @@ const Login = () => {
               onChangeText={(value) => setUser({ ...user, password: value })}
             />
           </Item>
-          <Button style={MainStyle.formBtn} primary>
-            <Text style={MainStyle.fromBtnText} onPress={() => handleLogin()}>
+          {error && !user.password && <Text style={MainStyle.errorMessage}>Password is required</Text>}
+          <Button style={MainStyle.formBtn} onPress={() => handleLogin()} primary>
+            <Text style={MainStyle.fromBtnText} >
 
               Login
             </Text>
