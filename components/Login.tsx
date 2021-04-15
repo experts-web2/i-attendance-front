@@ -15,7 +15,7 @@ import {
 import { MainStyle } from "../styles";
 import { IUserLogin } from "../models";
 import {login} from "../services/user.service"
-const Login = () => {
+const Login = (props :any) => {
   const [user, setUser] = useState<IUserLogin>({ email: "", password: "" });
   const [error , setError] =useState(false)
 
@@ -67,8 +67,11 @@ const Login = () => {
           </Button>
 
           {/* <Text style={LoginStyle.fromBtnText}></Text> */}
-          <Button transparent>
+          <Button transparent onPress={() => props.navigation.navigate("ForgotPassword")} >
             <Text>Forgot Password</Text>
+          </Button>
+          <Button transparent onPress={() => props.navigation.navigate("Signup")}>
+            <Text>Signup ?</Text>
           </Button>
         </Form>
       </Content>
