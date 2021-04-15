@@ -9,7 +9,7 @@ import ConfirmPassword from "./components/ConfirmPassword"
 export default function App() {
   return (
     <View style={styles.container}>
-      <Signup/>
+      <Login/>
       <StatusBar style="auto" />
     </View>
   );

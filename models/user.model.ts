@@ -6,8 +6,23 @@ export interface IUserLogin {
 export class User {
   name = "";
   email = "";
-  phoneNumber = "";
+  phone = "";
   city = "";
   center = "";
   password = "";
+
+  static isUserValid(user: User) {
+    if (
+      !user.email ||
+      !user.password ||
+      !user.name ||
+      !user.phone ||
+      !user.city ||
+      !user.center
+    ) {
+      return false;
+    } else {
+      return true;
+    }
+  }
 }

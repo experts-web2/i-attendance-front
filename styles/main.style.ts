@@ -1,6 +1,9 @@
 import { StyleSheet } from "react-native";
 
 export const MainStyle = StyleSheet.create({
+  row: {
+    marginLeft: -10
+  },
   container: {
     flex: 1,
     flexDirection: "column",
@@ -17,11 +20,15 @@ export const MainStyle = StyleSheet.create({
     marginLeft: "auto",
     marginRight: "auto",
     marginBottom: 30,
+    marginTop: 30,
+    borderWidth: 1,
+    borderColor: "black"
   },
   headerTitle: {
     marginLeft: "auto",
     marginRight: "auto",
-    marginBottom: 30,
+    marginBottom: 0,
+    marginTop: 50,
     color: "#000",
     fontSize: 32,
     borderBottomColor: "rgba(0,0,0,0)",
@@ -30,6 +37,8 @@ export const MainStyle = StyleSheet.create({
   formItem: {
     width: "100%",
     marginBottom: 15,
+    position: "relative",
+    
   },
   formBtn: {
     width: "100%",
@@ -41,4 +50,13 @@ export const MainStyle = StyleSheet.create({
     marginLeft: "auto",
     marginRight: "auto",
   },
+  formDropdown: {
+    flex: 1,
+    height: 40,
+    width: "100%",
+  },
+  errorMessage :{
+   color: "red",
+   fontSize: 12
+  }
 });

@@ -17,8 +17,11 @@ import {
     const [ code , setCode]= useState("")
     const [newPassword, setNewPassword] = useState("");
     const [confirmPassword, setConfirmPassword] = useState("");
+    const [error, setError] = useState(false);
     const handleSubmit =()=>{
-      
+      if(!code || !newPassword || !confirmPassword){
+        setError(true)
+       }
     }
       return (
           <Container style={MainStyle.container}>
@@ -34,21 +37,23 @@ import {
                   <Form>
                   <Item stackedLabel last>
               <Label>Code</Label>
-              <Input defaultValue={code} onChangeText={(value)=> setCode(value)} />
+              <Input keyboardType="numeric" defaultValue={code} onChangeText={(value)=> setCode(value)} />
             </Item>
+            {error && !code && <Text style={MainStyle.errorMessage}>Code is required</Text>}
             <Item style={MainStyle.formItem} stackedLabel last >
               <Label>New Password</Label>
               <Input secureTextEntry defaultValue={newPassword} onChangeText={(value)=> setNewPassword(value)}  />
             </Item>
+            {error && !newPassword && <Text style={MainStyle.errorMessage}>New password is required</Text>}
             <Item style={MainStyle.formItem} stackedLabel last>
               <Label>Confirm Password</Label>
               <Input secureTextEntry defaultValue={confirmPassword} onChangeText={(value)=> setConfirmPassword(value)}  />
             </Item>
-            {newPassword === confirmPassword ? (
-              <Text>Password Matched</Text>
-            ) : (
-              <Text>Password Not Matched</Text>
-            )}
+            {error && !confirmPassword && <Text style={MainStyle.errorMessage}>Confirm password is required</Text>}
+            {confirmPassword.length > 0 && newPassword !== confirmPassword &&
+            <Text> Password Not Matched </Text> }
+              
+            
             <Button style={MainStyle.formBtn}  primary>
                 <Text style={MainStyle.fromBtnText} onPress={() => handleSubmit()}> Submit</Text>
             </Button>
