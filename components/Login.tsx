@@ -29,7 +29,7 @@ const Login = (props: any) => {
      
      
     }
-    props.navigation.navigate("Test2");
+    props.navigation.navigate("HomeScreen");
   };
   return (
     <Container style={MainStyle.container}>

@@ -23,14 +23,14 @@ export default function App() {
       <NavigationContainer>
         <Stack.Navigator>
              <Stack.Screen
-            name="Test1"
+            name="AuthenticationScreen"
             options={{ headerShown: false }}
-            component={Test1}
+            component={AuthenticationScreen}
           />
                    <Stack.Screen
             options={{ headerShown: false }}
-            name="Test2"
-            component={Test2} 
+            name="HomeScreen"
+            component={HomeScreen} 
   
           />
         </Stack.Navigator>
@@ -47,7 +47,7 @@ const styles = StyleSheet.create({
   },
 });
 
-export const Test1 = () => {
+export const AuthenticationScreen = () => {
   return (
     <AuthStack.Navigator>
       <AuthStack.Screen
@@ -57,10 +57,11 @@ export const Test1 = () => {
       />
       <AuthStack.Screen name="Signup" component={Signup} />
       <AuthStack.Screen name="ForgotPassword" component={ForgotPassword} />
+ 
     </AuthStack.Navigator>
   );
 };
-export const Test2 = () => {
+export const HomeScreen = () => {
   return (
     <HomeStack.Navigator>
       <HomeStack.Screen
@@ -69,6 +70,7 @@ export const Test2 = () => {
         component={Home}
       />
       <HomeStack.Screen name="Attendance" component={Attendance} />
+      <AuthStack.Screen name="ChangePassword" component={ChangePassword} />
     </HomeStack.Navigator>
   );
 };

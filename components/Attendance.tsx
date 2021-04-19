@@ -152,7 +152,7 @@ const AttendanceForm = () => {
               onPress={() => handleSubmit()}
               primary
             >
-              <Text style={MainStyle.fromBtnText}>Sumbit</Text>
+              <Text style={MainStyle.fromBtnText}>Submit</Text>
             </Button>
           </Form>
         </Content>
