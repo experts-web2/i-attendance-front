@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-// import DateTimePicker from "@react-native-community/datetimepicker";
+import DateTimePicker from '@react-native-community/datetimepicker';
 import {
   Container,
   Header,
@@ -118,7 +118,7 @@ const AttendanceForm = () => {
             )}
 
 
-            {/* {showDatePicker && (
+            {showDatePicker && (
               <DateTimePicker
                 testID="dateTimePicker"
                 value={date}
@@ -127,7 +127,7 @@ const AttendanceForm = () => {
                 display="default"
                 onChange={(e, value) => handleDate(value)}
               />
-            )} */}
+            )}
 
             <Item
               style={MainStyle.formItem}
