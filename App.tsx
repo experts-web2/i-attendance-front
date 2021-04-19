@@ -22,13 +22,12 @@ export default function App() {
     <View style={styles.container}>
       <NavigationContainer>
         <Stack.Navigator>
-      
-          <Stack.Screen
+             <Stack.Screen
             name="Test1"
             options={{ headerShown: false }}
             component={Test1}
           />
-            <Stack.Screen
+                   <Stack.Screen
             options={{ headerShown: false }}
             name="Test2"
             component={Test2} 
@@ -45,8 +44,6 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: "#fff",
     padding: 10,
-    // alignItems: 'center',
-    // justifyContent: 'center',
   },
 });
 

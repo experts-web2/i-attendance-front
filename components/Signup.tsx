@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { Picker } from "@react-native-picker/picker";
-import { View } from "react-native";
+// import { Picker } from "@react-native-picker/picker";
 import {
   Container,
   Header,
@@ -101,18 +100,17 @@ const Signup = () => {
             <Item error={error && !user.city} stackedLabel last>
               <Label>City</Label>
               <Item style={MainStyle.row}>
-                <Picker
+                {/* <Picker
                 
                   style={MainStyle.formDropdown}
                   selectedValue={user.city}
                   onValueChange={(itemValue, itemIndex) =>
-                    setUser({ ...user, city: itemValue, center: "" })
+                    setUser({ ...user, city: itemValue as string, center: "" })
                   }
                 >
-                  <Picker.Item enabled={false} label="Choose" value="choose" />
                   <Picker.Item label="Multan" value="multan" />
                   <Picker.Item label="Lahore" value="lahore" />
-                </Picker>
+                </Picker> */}
               </Item>
             </Item>
             {error && !user.city && (
@@ -121,20 +119,19 @@ const Signup = () => {
             <Item error={error && !user.center} stackedLabel last>
               <Label>Center</Label>
               <Item style={MainStyle.row}>
-                <Picker
+                {/* <Picker
                   style={MainStyle.formDropdown}
                   selectedValue={user.center}
                   onValueChange={(itemValue, itemIndex) =>
-                    setUser({ ...user, center: itemValue })
+                    setUser({ ...user, center: itemValue as string})
                   }
                 >
-                  <Picker.Item enabled={false} label="Choose" value="choose" />
                   <Picker.Item label={"381 A Block"} value={"block"} />
                   <Picker.Item label={"Gulgasht"} value={"gulgasht"} />
                   <Picker.Item label={"Double Phatak"} value={"doublePhatak"} />
                   <Picker.Item label={"Johar Town"} value={"johartown"} />
                   <Picker.Item label={"Bahria Town"} value={"bahriaTown"} />
-                </Picker>
+                </Picker> */}
               </Item>
             </Item>
             {error && !user.center && (

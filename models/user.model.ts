@@ -26,3 +26,27 @@ export class User {
     }
   }
 }
+export class  Attendance {
+  employees = "" ;
+  nonEmployees ="";
+  newEmployees = "";
+  city = "Multan" ;
+  center = "Double Phatak";
+  date = new Date()
+
+  static isAttendanceValid (attendance: Attendance) {
+
+  if (
+    !attendance.employees ||
+    !attendance.nonEmployees ||
+    !attendance.newEmployees ||
+    !attendance.date 
+
+   ) {
+    return false;
+  } 
+  else {
+    return true;
+  }
+}
+}

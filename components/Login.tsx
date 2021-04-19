@@ -23,13 +23,13 @@ const Login = (props: any) => {
     if (!user.email || !user.password) {
       setError(true);
     } else {
-      login(user)
-        .then((response) => console.log(response))
-        .catch((err) => console.log(err));
-      props.navigation.navigate("Test2");
+      // login(user)
+      //   .then((response) => console.log(response))
+      //   .catch((err) => console.log(err));
+     
      
     }
-
+    props.navigation.navigate("Test2");
   };
   return (
     <Container style={MainStyle.container}>
