@@ -108,6 +108,7 @@ const Signup = () => {
                     setUser({ ...user, city: itemValue as string, center: "" })
                   }
                 >
+                  <Picker.Item label={"Choose"} value={"choose"} enabled={true} />
                   <Picker.Item label="Multan" value="multan" />
                   <Picker.Item label="Lahore" value="lahore" />
                 </Picker>
@@ -126,6 +127,7 @@ const Signup = () => {
                     setUser({ ...user, center: itemValue as string})
                   }
                 >
+                   <Picker.Item label={"Choose"} value={"choose"} enabled={false} />
                   <Picker.Item label={"381 A Block"} value={"block"} />
                   <Picker.Item label={"Gulgasht"} value={"gulgasht"} />
                   <Picker.Item label={"Double Phatak"} value={"doublePhatak"} />

@@ -10,7 +10,7 @@ import {
   Thumbnail,
 } from "native-base";
 import { MainStyle } from "../styles";
-const Logout = () => {
+const Logout = (props :any) => {
 
 
   return (
@@ -28,7 +28,7 @@ const Logout = () => {
       
 
           <Button style={MainStyle.formBtn}  primary>
-            <Text style={MainStyle.fromBtnText}>Logout</Text>
+            <Text style={MainStyle.fromBtnText} onPress={() => props.navigation.navigate("Login")}>Logout</Text>
           </Button>
         </Form>
       </Content>

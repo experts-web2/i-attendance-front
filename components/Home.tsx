@@ -51,31 +51,31 @@ export const Home = (props: any) => {
           <CardItem
             style={{
               backgroundColor: "rgba(19, 138, 202, 0.637);",
-              height: 60,
+              height: 80,
             }}
           >
-            <Body></Body>
+            <Body><Text style={{ fontSize: 30 }}>Attendance 100%</Text></Body>
           </CardItem>
         </Card>
         <Card>
           <CardItem
-            style={{ backgroundColor: "rgba(66, 40, 211, 0.521);", height: 60 }}
+            style={{ backgroundColor: "rgba(66, 40, 211, 0.521);", height: 80 }}
           >
-            <Body></Body>
+            <Body><Text style={{ fontSize: 30 }}>New Ehad 32</Text></Body>
           </CardItem>
         </Card>
         <Card>
           <CardItem
-            style={{ backgroundColor: "rgba(212, 27, 14, 0.671);", height: 60 }}
+            style={{ backgroundColor: "rgba(212, 27, 14, 0.671);", height: 80 }}
           >
-            <Body></Body>
+            <Body><Text style={{ fontSize: 30 }}>Attendance 100%</Text></Body>
           </CardItem>
         </Card>
         <Card>
           <CardItem
-            style={{ backgroundColor: "rgba(45, 184, 75, 0.877);", height: 60 }}
+            style={{ backgroundColor: "rgba(45, 184, 75, 0.877);", height: 80 }}
           >
-            <Body></Body>
+            <Body><Text style={{ fontSize: 30 }}>Attendance 100%</Text></Body>
           </CardItem>
         </Card>
 

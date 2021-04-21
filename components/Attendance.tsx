@@ -1,8 +1,8 @@
-import React, { useState } from "react";
+import React, { useState ,useEffect } from "react";
 import DateTimePicker from '@react-native-community/datetimepicker';
 import {
   Container,
-  Header,
+  CheckBox,
   Content,
   Button,
   Form,
@@ -13,7 +13,9 @@ import {
   Title,
   Thumbnail,
   Icon,
+  Body,
 } from "native-base";
+import {attendanceData} from "../constants/attendance-data"
 import { ScrollView, TouchableOpacity } from "react-native";
 import { MainStyle } from "../styles";
 import { Attendance, User } from "../models/user.model";
@@ -21,9 +23,10 @@ const AttendanceForm = () => {
   const [date, setDate] = useState(new Date());
   const [showDatePicker, setShowDatePicker] = useState(false);
   const [selectDate, setSelectDate] = useState(new Date());
+  const [checked ,setChecked] = useState(true)
   const [attendance, setAttendance] = useState(new Attendance());
   const [error, setError] = useState(false);
-
+  const [attendanceRecord , setAttendanceRecord] =useState(attendanceData)
   const handleDate = (value: any) => {
     const date = value as Date;
     setShowDatePicker(false);
@@ -35,6 +38,10 @@ const AttendanceForm = () => {
       setError(true);
     }
   };
+  const handleCheck=(u : any)=>{
+    const updated = attendanceRecord.map(x => x.id === u.id ? ({...u, present: !u.present} ) : x)
+  setAttendanceRecord(updated)
+  }
   return (
     <Container style={MainStyle.container}>
       <ScrollView>
@@ -146,6 +153,22 @@ const AttendanceForm = () => {
                 })}
               />
             </Item>
+
+
+
+         <Text>Managers</Text>
+{attendanceRecord.map((u , i)=>{
+  return(
+    <Item>
+         <CheckBox checked={u.present} color="green"
+             onPress={()=> handleCheck(u)}
+             />
+            <Body>
+              <Text>{u.name}</Text>
+              </Body>
+          </Item>
+  )
+})}
 
             <Button
               style={MainStyle.formBtn}
