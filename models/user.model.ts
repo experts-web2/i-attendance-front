@@ -7,7 +7,7 @@ export class User {
   name = "";
   email = "";
   phone = "";
-  city = "";
+  city: string = "";
   center = "";
   password = "";
 

@@ -15,25 +15,54 @@ import {
   Icon,
 } from "native-base";
 import { User } from "../models/user.model";
-import { ScrollView } from "react-native";
+import { City } from "../models/city.model";
+import { ScrollView, ActivityIndicator ,View } from "react-native";
 import { MainStyle } from "../styles";
-import { signup } from "../services/user.service";
-const Signup = () => {
+import { signup, getCities, getCentersByCity } from "../services/user.service";
+const Signup = (props: any) => {
   const [user, setUser] = useState(new User());
   const [confirmPassword, setConfirmPassword] = useState("");
+  const [cities, setCities] = useState<City[]>([]);
+  const [centers, setCenters] = useState<City[]>([]);
   const [error, setError] = useState(false);
-  // const [disable, setDisable] = useState(true);
-  const handleSignup = async () => {
+  const [enabled, setEnabled] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
+
+  useEffect(() => {
+    getCities()
+      .then((response: any) => {
+        setCities(response.data);
+      })
+      .catch((err) => console.log(err));
+  }, []);
+
+  const handleCityChange = (itemValue: any) => {
+    console.log("itemValue", itemValue);
+    setEnabled(true);
+    setUser({ ...user, city: itemValue as string, center: "" });
+
+    getCentersByCity(itemValue).then((response: any) => {
+      console.log("response", response);
+      setCenters(response.data);
+    });
+  };
+
+  const handleSignup = async (props: any) => {
+    setIsLoading(true);
     if (!User.isUserValid(user) || !confirmPassword) {
       setError(true);
+    } else {
+      
+      signup(user)
+        .then((response) => {
+         
+          props.navigation.navigate("Login");
+          setIsLoading(false);
+        })
+        .catch((err) => {
+          setIsLoading(false);
+        });
     }
-    signup({
-      ...user,
-      city: "507f1f77bcf86cd799439011",
-      center: "507f1f77bcf86cd799439011",
-    })
-      .then((response) => console.log(response))
-      .catch((err) => console.log("ERR", err));
   };
 
   return (
@@ -63,7 +92,7 @@ const Signup = () => {
               />
             </Item>
             {error && !user.name && (
-              <Text style={MainStyle.errorMessage} >Name is required</Text>
+              <Text style={MainStyle.errorMessage}>Name is required</Text>
             )}
 
             <Item
@@ -79,7 +108,7 @@ const Signup = () => {
               />
             </Item>
             {error && !user.email && (
-              <Text style={MainStyle.errorMessage} >Email is required</Text>
+              <Text style={MainStyle.errorMessage}>Email is required</Text>
             )}
             <Item
               error={error && !user.phone}
@@ -95,22 +124,24 @@ const Signup = () => {
               />
             </Item>
             {error && !user.phone && (
-              <Text style={MainStyle.errorMessage}>Phone number is required</Text>
+              <Text style={MainStyle.errorMessage}>
+                Phone number is required
+              </Text>
             )}
             <Item error={error && !user.city} stackedLabel last>
               <Label>City</Label>
               <Item style={MainStyle.row}>
                 <Picker
-                
+                  mode={"dropdown"}
                   style={MainStyle.formDropdown}
                   selectedValue={user.city}
-                  onValueChange={(itemValue, itemIndex) =>
-                    setUser({ ...user, city: itemValue as string, center: "" })
-                  }
+                  onValueChange={(itemValue, event: any) => {
+                    handleCityChange(itemValue);
+                  }}
                 >
-                  <Picker.Item label={"Choose"} value={"choose"} enabled={true} />
-                  <Picker.Item label="Multan" value="multan" />
-                  <Picker.Item label="Lahore" value="lahore" />
+                  {cities.map((c, i) => {
+                    return <Picker.Item label={c.name} value={c._id} key={i} />;
+                  })}
                 </Picker>
               </Item>
             </Item>
@@ -119,22 +150,24 @@ const Signup = () => {
             )}
             <Item error={error && !user.center} stackedLabel last>
               <Label>Center</Label>
-              <Item style={MainStyle.row}>
-                <Picker
-                  style={MainStyle.formDropdown}
-                  selectedValue={user.center}
-                  onValueChange={(itemValue, itemIndex) =>
-                    setUser({ ...user, center: itemValue as string})
-                  }
-                >
-                   <Picker.Item label={"Choose"} value={"choose"} enabled={false} />
-                  <Picker.Item label={"381 A Block"} value={"block"} />
-                  <Picker.Item label={"Gulgasht"} value={"gulgasht"} />
-                  <Picker.Item label={"Double Phatak"} value={"doublePhatak"} />
-                  <Picker.Item label={"Johar Town"} value={"johartown"} />
-                  <Picker.Item label={"Bahria Town"} value={"bahriaTown"} />
-                </Picker>
-              </Item>
+              {
+                <Item style={MainStyle.row}>
+                  <Picker
+                    style={MainStyle.formDropdown}
+                    selectedValue={user.center}
+                    onValueChange={(itemValue, itemIndex) =>
+                      setUser({ ...user, center: itemValue as string })
+                    }
+                    enabled={enabled}
+                  >
+                    {centers.map((c, i) => {
+                      return (
+                        <Picker.Item label={c.name} value={c._id} key={i} />
+                      );
+                    })}
+                  </Picker>
+                </Item>
+              }
             </Item>
             {error && !user.center && (
               <Text style={MainStyle.errorMessage}>Center is required</Text>
@@ -153,7 +186,7 @@ const Signup = () => {
               />
             </Item>
             {error && !user.password && (
-              <Text style={MainStyle.errorMessage} >Password is required</Text>
+              <Text style={MainStyle.errorMessage}>Password is required</Text>
             )}
             <Item
               error={error && !confirmPassword}
@@ -169,20 +202,29 @@ const Signup = () => {
               />
             </Item>
             {error && !confirmPassword && (
-              <Text style={MainStyle.errorMessage} >Confirm password is required</Text>
+              <Text style={MainStyle.errorMessage}>
+                Confirm password is required
+              </Text>
             )}
 
             {confirmPassword.length > 0 &&
               user.password !== confirmPassword && (
-                <Text style={MainStyle.errorMessage} >Password Not Matched</Text>
+                <Text style={MainStyle.errorMessage}>Password Not Matched</Text>
               )}
-            <Button
-              style={MainStyle.formBtn}
-              primary
-              onPress={() => handleSignup()}
-            >
-              <Text style={MainStyle.fromBtnText}> Signup </Text>
-            </Button>
+            {isLoading ? (
+             <ActivityIndicator size="large" color="#0000ff" /> 
+            ) : (
+              <Button
+                style={MainStyle.formBtn}
+                primary
+                onPress={() => handleSignup(props)}
+              >
+                <Text style={MainStyle.fromBtnText}> Signup </Text>
+              </Button>
+            )}
+         
+   
+ 
           </Form>
         </Content>
       </ScrollView>

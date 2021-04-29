@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 import {
   Container,
   Header,
@@ -23,13 +24,13 @@ const Login = (props: any) => {
     if (!user.email || !user.password) {
       setError(true);
     } else {
-      // login(user)
-      //   .then((response) => console.log(response))
-      //   .catch((err) => console.log(err));
-     
-     
+      login(user)
+        .then((response: any) => {
+          AsyncStorage.setItem("token", response.token).then(() => {
+            props.navigation.navigate("HomeScreen");
+          });
+        }).catch((err) => console.log(err));
     }
-    props.navigation.navigate("HomeScreen");
   };
   return (
     <Container style={MainStyle.container}>
